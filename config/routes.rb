@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 
-  # get "/ingredients", to: "ingredients#index"
-  # get "/ingredients/:id", to: "ingredients#show"
+
+  root "home#index"
 
   resources :ingredients
+  resources :fridge, only: [:index, :create]
+
+
 end
 

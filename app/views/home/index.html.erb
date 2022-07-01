@@ -1,0 +1,19 @@
+<h1>Home#index</h1>
+<p>Find me in app/views/home/index.html.erb</p>
+
+<h1>My Fridge</h1>
+<% if @fridge.ingredients.count > 0 %>
+    <ul>
+        <% @fridge.ingredients.each do |ingredient| %>
+            <li>
+                <%= ingredient.name %>
+            </li>
+        <% end %>
+    </ul>
+<% else %>
+    <p>No ingredients yet</p>
+<% end %>
+
+<div>
+    <%= link_to "Add ingredients to fridge", fridge_index_path %>
+</div>

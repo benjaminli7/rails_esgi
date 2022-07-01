@@ -1,0 +1,20 @@
+<h1>Add ingredients to fridge</h1>
+
+<%= form_with url: "/fridge", method: :post do |form| %>
+
+  <ul>
+    <% for ingredient in @ingredients %>
+        <% if !@fridge.ingredients.include? ingredient.id %>
+            <li>
+                <%= ingredient.name %>
+                <%= check_box_tag "ingredient_ids[]", ingredient.id %>
+            </li>
+        <% end %>
+    <% end %>
+  </ul>
+
+    <div>
+        <%= form.submit %>
+    </div>
+
+<% end %>

@@ -1,12 +1,17 @@
 <h1>Ingredients</h1>
 
-<ul>
-  <% @ingredients.each do |ingredient| %>
-    <li>
-        <%= link_to ingredient.name, ingredient %>
-    </li>
-  <% end %>
-</ul>
+<% if Ingredient.count > 0 %>
+  <ul>
+    <% @ingredients.each do |ingredient| %>
+      <li>
+          <%= link_to ingredient.name, ingredient %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No ingredients yet</p>
+<% end %>
+
 <div>
     <%= link_to "Add new ingredient", new_ingredient_path %>
 </div>
