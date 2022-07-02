@@ -1,0 +1,19 @@
+<section class="add_ingredients">
+    <h1>Ajouter des ingrédients au frigo</h1>
+    <div>
+    <%= form_with url: "/fridge/add_ingredients", method: :post do |form| %>
+        <ul class="columns">
+            <% for ingredient in @ingredients %>
+                <% if !@fridge.ingredients.include? ingredient.id %>
+                    <li>
+                        <%= ingredient.name %>
+                        <%= check_box_tag "ingredient_ids[]", ingredient.id %>
+                    </li>
+                <% end %>
+            <% end %>
+        </ul>
+        <div>
+            <%= form.submit "Ajouter au frigo" %>
+        </div>
+    <% end %>
+</section>

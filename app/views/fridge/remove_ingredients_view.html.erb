@@ -1,0 +1,23 @@
+<section class="remove_ingredients">
+    <h1>Retirer des ingrédients du frigo</h1>
+    <%= form_with url: "/fridge/remove_ingredients", method: :post do |form| %>
+        <ul class="columns">
+            <% for ingredient in @ingredients %>
+                <% if @fridge.ingredients.include? ingredient.id %>
+                    <li>
+                        <%= ingredient.name %>
+                        <%= check_box_tag "ingredient_ids[]", ingredient.id %>
+                    </li>
+                <% end %>
+            <% end %>
+            <% if @fridge.ingredients.count == 0 %>
+                <li>
+                    Votre frigo est vide. Ajoutez des ingrédients!
+                </li>
+            <% end %>
+        </ul>
+        <div>
+            <%= form.submit "Retirer du frigo" %>
+        </div>
+    <% end %>
+</section>

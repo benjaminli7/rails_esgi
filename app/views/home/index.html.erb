@@ -1,19 +1,70 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-
-<h1>My Fridge</h1>
-<% if @fridge.ingredients.count > 0 %>
-    <ul>
-        <% @fridge.ingredients.each do |ingredient| %>
+<section class="fridge">
+    <h1>Mon frigo</h1>
+    <ul class="columns">
+        <% for ingredient in @ingredients %>
+            <% if @fridge.ingredients.include? ingredient.id %>
+                <li>
+                    - <%= ingredient.name %>
+                </li>
+            <% end %>
+        <% end %>
+        <% if @fridge.ingredients.count == 0 %>
             <li>
-                <%= ingredient.name %>
+                Votre frigo est vide. Ajoutez des ingrédients!
             </li>
         <% end %>
     </ul>
-<% else %>
-    <p>No ingredients yet</p>
-<% end %>
 
-<div>
-    <%= link_to "Add ingredients to fridge", fridge_index_path %>
-</div>
+
+
+
+    <div class="btn-group">
+        <%= link_to "Ajouter des ingrédients au frigo", fridge_add_ingredients_path %>
+        <%= link_to "Retirer des ingrédients du frigo", fridge_remove_ingredients_path %>
+    </div>
+</section>
+
+<section class="possible_recipes">
+    <h1>Recettes que vous pouvez faire</h1>
+    <ul>
+        <% for possibleRecipe in @possibleRecipes %>
+        <li>
+            - <%= possibleRecipe.name %>
+
+            <%= possibleRecipe.ingredients %>
+        </li>
+        <% end %>
+        <% if @possibleRecipes.empty? %>
+            <li>
+                Aucune recette ne correspond à vos ingrédients
+            </li>
+        <% end%>
+    </ul>
+</section>
+
+<section class="impossible_recipes">
+    <div class="title">
+        <h1>Recettes dont il vous manque des ingrédients</h1>
+        <small>Les ingrédients manquants sont ceux qui sont barrés</small>
+    </div>
+    <ul>
+        <% for impossibleRecipe in @impossibleRecipes %>
+        <li>
+            - <%= impossibleRecipe.name %>
+
+            (<% for ingredient in impossibleRecipe.ingredients %>
+                <% if @fridge.ingredients.include?(Ingredient.where(name: ingredient).first.id) %>
+                    <span><%= ingredient %></span>
+                <% else %>
+                    <s><%= ingredient %></s>
+                <% end %>
+            <% end %>)
+        </li>
+        <% end %>
+        <% if @impossibleRecipes.empty? %>
+            <li>
+                Vous pouvez faire toutes les recettes disponibles
+            </li>
+        <% end%>
+    </ul>
+</section>
