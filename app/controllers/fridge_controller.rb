@@ -11,7 +11,7 @@ class FridgeController < ApplicationController
     @fridge = Fridge.first
     @ingredients = Ingredient.all
 
-    if params["ingredients_ids"].nil? == false
+    if params["ingredient_ids"].nil? == false
       for ingredient_id in params["ingredient_ids"]
         @fridge.ingredients.push(ingredient_id)
       end
@@ -38,7 +38,8 @@ class FridgeController < ApplicationController
     @fridge = Fridge.first
     @ingredients = Ingredient.all
 
-    if params["ingredients_ids"].nil? == false
+
+    if params["ingredient_ids"].nil? == false
       for ingredient_id in params["ingredient_ids"]
         @fridge.ingredients.delete(ingredient_id.to_i)
       end
