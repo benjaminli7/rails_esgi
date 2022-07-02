@@ -84,6 +84,7 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
   database: rails_esgi_production
   username: rails_esgi
   password: <%= ENV['RAILS_ESGI_DATABASE_PASSWORD'] %>
